@@ -203,6 +203,12 @@ COPY --chown=$DOCKER_USER:$DOCKER_USER\
      --from=build \
      /azerothcore/env/dist/bin/dbimport /azerothcore/env/dist/bin/dbimport
 
+# Copy mod-playerbots sql scripts so that import will use them
+COPY --chown=$DOCKER_USER:$DOCKER_USER \
+    modules/mod-playerbots/sql/characters data/sql/custom/db_characters
+COPY --chown=$DOCKER_USER:$DOCKER_USER \
+    modules/mod-playerbots/sql/world data/sql/custom/db_world
+
 CMD /azerothcore/env/dist/bin/dbimport
 
 ###############
